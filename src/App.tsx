@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.module.scss';
+import {Table} from "./features/table/Table";
+import {Search} from "./features/search/Search";
+import styles from "./App.module.scss"
+import {Pagination} from "./components/pagination/Pagination";
+import {useAppDispatch, useCustomSelector} from "./store/store";
+import {setParams} from "./store/tableReducer";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {params, totalLength} = useCustomSelector(state => state.table)
+    const dispatch = useAppDispatch()
+
+    const onPageChangeHandler = (page: number) => {
+        dispatch(setParams({page}))
+    }
+
+    return (
+        <div className={styles.App}>
+            <Search/>
+            <Table/>
+            <Pagination
+                siblingCount={0}
+                currentPage={params.page}
+                totalCount={totalLength}
+                pageSize={10}
+                onPageChange={onPageChangeHandler}
+            />
+        </div>
+    );
 }
 
 export default App;

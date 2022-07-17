@@ -1,0 +1,23 @@
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 350px;
+  justify-content: space-evenly;
+
+  .table {
+    width: 60%;
+    border-collapse: collapse;
+
+    height: 20px;
+    .tbody {
+      tr {
+        border: 2px solid #bbaea9;
+        margin: 5px;
+        td {
+          border-right: 1px solid #bbaea9;
+        }
+      }
+    }
+  }
+}
